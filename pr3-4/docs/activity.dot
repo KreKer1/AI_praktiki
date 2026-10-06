@@ -1,0 +1,18 @@
+digraph G {
+graph [rankdir=TB, bgcolor="white", pad=0.2, nodesep=0.25, ranksep=0.35];
+node [shape=box, style="rounded,filled", fontname="Liberation Serif", fontsize=12, color="#2F5597", fillcolor="#EAF2F8", margin="0.12,0.08"];
+edge [fontname="Liberation Serif", fontsize=10, color="#555555"];
+start [label="Начало", shape=oval, fillcolor="#E2F0D9", color="#548235"];
+end [label="Завершение", shape=oval, fillcolor="#FCE4D6", color="#C65911"];
+n1 [label="Прочитать с клавиатуры (Scanner):\nколичество (int), цену и скидку (double);\nставка НДС = константа VAT_RATE" ,shape=parallelogram,fillcolor="#E4DFEC",color="#7030A0"];
+n0 [label="Введено не число или значение не введено\n(InputMismatchException / NoSuchElementException):\nвывести «нужно вводить числа», расчёт не выполнять", fillcolor="#FCE4D6", color="#C65911"];
+n2 [label="A1. Проверить (isValid):\n1 ≤ количество ≤ 10 000;  0 < цена ≤ 5 000 000;\n0 ≤ скидка ≤ 30" ,fillcolor="#E2EFDA",color="#548235"];
+n3 [label="Данные корректны\n(isValid вернул true)",shape=diamond,fillcolor="#FFF2CC",color="#BF9000"];
+n4 [label="Вычислить базовую сумму:\nbase = количество × цена  (calculateBase)" ];
+n5 [label="A2. discounted = base × (1 − скидка/100)  (applyDiscount);\nvat = discounted × VAT_RATE/100  (calculateVat);\nитог = discounted + vat, округлить до копеек (calculateTotal);\nк итогу прибавить плату за обработку (calculateProcessingFee):\n0 при количестве ≥ 20, иначе 500 руб. (вариант 3)" ,fillcolor="#E2EFDA",color="#548235"];
+n6 [label="Вывести итог с двумя знаками\nпосле запятой (printf %.2f)" ];
+n7 [label="Вывести «Ошибка: значения вне\nдопустимых диапазонов»" ];
+start -> n1; n1 -> n2 [label="числа прочитаны"]; n1 -> n0 [label="ошибка чтения"]; n2 -> n3;
+n3 -> n4 [label="да"]; n3 -> n7 [label="нет"];
+n4 -> n5; n5 -> n6; n6 -> end; n7 -> end; n0 -> end;
+}
