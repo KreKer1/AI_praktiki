@@ -13,6 +13,8 @@
 ## Файлы
 - `TimesheetAnalyzer.java` — разбор строки (`parseHours`) и расчёты (`total`, `average`, `overtimeDays`, `weeklyOvertime`, `analyze`). Правила вынесены в константы в начале класса.
 - `SelfCheck.java` — проверки: границы 0 и 16, значение 17, пустая строка, неверный формат, число значений, вариант 3.
+- `docs/` — Activity-диаграмма и диаграмма классов.
+- `DECISIONS.md` — два принципиальных решения.
 
 ## Запуск (IntelliJ IDEA)
 - `TimesheetAnalyzer` — правый клик → Run, ввести строку, например `9;8;7;10;8`.
