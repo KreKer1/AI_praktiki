@@ -1,0 +1,21 @@
+digraph G {
+graph [rankdir=TB, bgcolor="white", pad=0.2, nodesep=0.3, ranksep=0.35];
+node [shape=box, style="rounded,filled", fontname="Liberation Serif", fontsize=12, color="#2F5597", fillcolor="#EAF2F8", margin="0.12,0.08"];
+edge [fontname="Liberation Serif", fontsize=10, color="#555555"];
+start [label="Начало", shape=oval, fillcolor="#E2F0D9", color="#548235"];
+end [label="Завершение", shape=oval, fillcolor="#FCE4D6", color="#C65911"];
+n1 [label="Получить строку часов\n(клавиатура или файл)" ,shape=parallelogram,fillcolor="#E4DFEC",color="#7030A0"];
+n1a [label="Строка пустая?", shape=diamond, fillcolor="#FFF2CC", color="#BF9000"];
+n2 [label="Разделить строку на элементы:\nline.split(\";\", -1)" ];
+n3 [label="Ровно пять значений?\n(parts.length == 5)" ,shape=diamond,fillcolor="#FFF2CC",color="#BF9000"];
+n4 [label="A1. Цикл for по элементам i = 0..4:\nпозиция = i + 1; убрать пробелы (trim);\nInteger.parseInt(text) — целое число?\n0 ≤ значение ≤ 16?  Записать в hours[i]" ,fillcolor="#E2EFDA",color="#548235"];
+n5 [label="Все элементы корректны?\n(ни один не бросил исключение)" ,shape=diamond,fillcolor="#FFF2CC",color="#BF9000"];
+n6 [label="total(hours), average(hours),\novertimeDays(hours) — циклы по массиву;\nweeklyOvertime = max(0, сумма − 20)" ];
+n7 [label="A2. Сформировать отчёт:\n«сумма … ч; среднее … ч/день;\nдней с переработкой …; недельная переработка … ч»\nи вывести его" ,fillcolor="#E2EFDA",color="#548235"];
+n8 [label="Сформировать сообщение об ошибке\n(с номером позиции, если ошибка в значении)\nи вывести «ОШИБКА: …»" ];
+start -> n1; n1 -> n1a; n1a -> n8 [label="да"]; n1a -> n2 [label="нет"]; n2 -> n3;
+n3 -> n4 [label="да"]; n3 -> n8 [label="нет"];
+n4 -> n5;
+n5 -> n6 [label="да"]; n5 -> n8 [label="нет"];
+n6 -> n7; n7 -> end; n8 -> end;
+}
